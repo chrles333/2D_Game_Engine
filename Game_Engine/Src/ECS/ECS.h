@@ -71,7 +71,7 @@ public:
 
 	// Check in bitset if entity has specific component attached
 	template <typename T> bool hasComponent() const {
-		return componentBitSet[getComponentID<T>()];
+		return componentBitSet[getComponentTypeID<T>()];
 	}
 
 	// Add component to entity
