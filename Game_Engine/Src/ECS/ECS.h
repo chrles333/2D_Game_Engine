@@ -60,10 +60,12 @@ public:
 	// Loop through entity's components and call update and draw method
 	void update() {
 		for (auto& c : components) c->update();
+	}
+
+	void draw() {
 		for (auto& c : components) c->draw();
 	}
 
-	void draw() {}
 	bool isActive() const { return active; }
 	void destroy() { active = false; } // Can call entity's destroy function from a component
 
