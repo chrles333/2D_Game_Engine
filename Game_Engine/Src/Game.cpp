@@ -16,6 +16,7 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN;
 	}
 
+	// If succesfully initialised SDL subsystems
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 		window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, flags);
 		renderer = SDL_CreateRenderer(window, -1, 0);
@@ -24,6 +25,8 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 		}
 
 		isRunning = true;
+	} else {
+		isRunning = false;
 	}
 
 	SDL_Surface* tmpSurface = IMG_Load("assets/player.png");
@@ -33,9 +36,9 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
 void Game::handleEvents() {
 	SDL_Event event;
-
 	SDL_PollEvent(&event);
 
+	// Check if user closed window
 	switch (event.type) {
 		case SDL_QUIT :
 			isRunning = false;
@@ -48,13 +51,14 @@ void Game::handleEvents() {
 void Game::update() {
 	cnt++;
 	destR.h = 64;
-	destR.w = 64;
+	destR.w = 90;
 	destR.x = cnt;
 	std::cout << cnt << std::endl;
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer);
+	// Add stuff to do
 	SDL_RenderCopy(renderer, playerTex, NULL, &destR);
 	SDL_RenderPresent(renderer);
 }
