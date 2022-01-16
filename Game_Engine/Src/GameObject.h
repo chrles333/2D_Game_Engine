@@ -4,7 +4,7 @@
 class GameObject {
 public:
 	// Constructor
-	GameObject(const char* textureSheet, SDL_Renderer* ren, int x, int y);
+	GameObject(const char* textureSheet, int x, int y);
 
 	// Destructor
 	~GameObject();
@@ -22,5 +22,4 @@ private:
 
 	// Display
 	SDL_Rect srcRect, destRect;
-	SDL_Renderer* renderer;
 };

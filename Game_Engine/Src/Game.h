@@ -22,9 +22,10 @@ public:
 
 	bool running() { return isRunning; } // Return current state of game
 
+	static SDL_Renderer* renderer; // To avoid creating copies of the same pointer
+
 private:
 	bool isRunning = false;
 	int cnt = 0;
 	SDL_Window *window;
-	SDL_Renderer *renderer;
 };

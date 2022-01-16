@@ -3,7 +3,9 @@
 #include "GameObject.h"
 
 GameObject *player;
-GameObject* enemy;
+GameObject *enemy;
+
+SDL_Renderer *Game::renderer = nullptr;
 
 Game::Game()
 {}
@@ -32,8 +34,8 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 	}
 
 	// Create new game objects
-	player = new GameObject("assets/player.png", renderer, 0, 0);
-	enemy = new GameObject("assets/enemy.png", renderer, 50, 50);
+	player = new GameObject("assets/player.png", 0, 0);
+	enemy = new GameObject("assets/enemy.png", 50, 50);
 }
 
 void Game::handleEvents() {
