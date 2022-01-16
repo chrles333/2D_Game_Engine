@@ -27,5 +27,11 @@ public:
 	Vector2D& operator*=(const Vector2D& vec);
 	Vector2D& operator/=(const Vector2D& vec);
 
+	// Used for multiplying vectors by a scale number
+	Vector2D& operator*(const int& i);
+	// Sets x & y members to 0
+	Vector2D& Zero();
+
+
 	friend std::ostream& operator<<(std::ostream& stream, const Vector2D& vec);
 };
