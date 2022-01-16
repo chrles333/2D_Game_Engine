@@ -3,6 +3,9 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
+#include <vector>
+
+class ColliderComponent; // Forward declaration
 
 class Game {
 public:
@@ -24,6 +27,9 @@ public:
 
 	static SDL_Renderer* renderer; // To avoid creating copies of the same pointer
 	static SDL_Event event;
+
+	// List of colliders for existing objects
+	static std::vector<ColliderComponent*> colliders;
 
 private:
 	bool isRunning = false;

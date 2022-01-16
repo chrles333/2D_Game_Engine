@@ -11,8 +11,15 @@ Manager manager;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
 
+std::vector<ColliderComponent*> Game::colliders;
+
 auto& player(manager.addEntity());
 auto& wall(manager.addEntity());
+
+// Various tiles
+auto& tile0(manager.addEntity());
+auto& tile1(manager.addEntity());
+auto& tile2(manager.addEntity());
 
 Game::Game()
 {}
@@ -42,6 +49,14 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 
 	// Create new map (default full of water)
 	map = new Map();
+
+	tile0.addComponent<TileComponent>(200, 200, 32, 32, 0); // Water
+	tile1.addComponent<TileComponent>(250, 250, 32, 32, 1); // Dirt
+	// Add collision component to dirt tile
+	tile1.addComponent<ColliderComponent>("dirt");
+	tile2.addComponent<TileComponent>(150, 150, 32, 32, 2); // Grass
+	// Add collision component to grass tile
+	tile2.addComponent<ColliderComponent>("grass");
 
 	// Add transform component to new player
 	player.addComponent<TransformComponent>(2);
@@ -77,12 +92,8 @@ void Game::update() {
 	manager.update(); // Update all entities -> updates all components
 
 	// Check for collision
-	if (Collision::AABB(player.getComponent<ColliderComponent>().collider,
-		wall.getComponent<ColliderComponent>().collider)) {
-		player.getComponent<TransformComponent>().scale = 1; // For testing
-		// Reverse 'bounce' movement when collide with wall
-		player.getComponent<TransformComponent>().velocity * -1;
-		std::cout << "Wall Hit!" << std::endl;
+	for (auto cc : colliders) {
+		Collision::AABB(player.getComponent<ColliderComponent>(), *cc);
 	}
 }
 
@@ -90,7 +101,7 @@ void Game::render() {
 	SDL_RenderClear(renderer);
 
 	// Render map
-	map->drawMap();
+	//map->drawMap();
 	manager.draw();
 
 	SDL_RenderPresent(renderer);

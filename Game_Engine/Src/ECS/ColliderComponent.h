@@ -32,6 +32,9 @@ public:
 			entity->addComponent<TransformComponent>();
 		}
 		transform = &entity->getComponent<TransformComponent>();
+
+		// Add newly created component into component list
+		Game::colliders.push_back(this);
 	}
 
 	void update() override {
