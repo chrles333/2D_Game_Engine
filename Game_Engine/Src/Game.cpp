@@ -9,8 +9,7 @@ Game::Game()
 Game::~Game()
 {}
 
-void Game::init(const char *title, int width, int height, bool fullscreen)
-{
+void Game::init(const char* title, int width, int height, bool fullscreen) {
 	int flags = 0;
 	
 	if (fullscreen) {
@@ -32,8 +31,7 @@ void Game::init(const char *title, int width, int height, bool fullscreen)
 	SDL_FreeSurface(tmpSurface);
 }
 
-void Game::handleEvents()
-{
+void Game::handleEvents() {
 	SDL_Event event;
 
 	SDL_PollEvent(&event);

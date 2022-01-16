@@ -2,9 +2,7 @@
 
 Game *game = nullptr;
 
-int main() {
-
-
+int main(int argc, char *argv[]) {
 	game = new Game();
 	game->init("GameWindow", 800, 600, false);
 
