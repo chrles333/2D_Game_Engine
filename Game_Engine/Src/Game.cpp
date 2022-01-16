@@ -8,6 +8,8 @@ Map *map;
 Manager manager;
 
 SDL_Renderer *Game::renderer = nullptr;
+SDL_Event Game::event;
+
 auto& player(manager.addEntity());
 
 Game::Game()
@@ -39,13 +41,15 @@ void Game::init(const char* title, int width, int height, bool fullscreen) {
 	// Create new map (default full of water)
 	map = new Map();
 
-	// Add position component to new player
+	// Add transform component to new player
 	player.addComponent<TransformComponent>();
+	// Add sprite component to entity
 	player.addComponent<SpriteComponent>("assets/player.png");
+	// Add keyboard controller component to entity
+	player.addComponent<KeyboardController>();
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
 	SDL_PollEvent(&event);
 
 	// Check if user closed window
@@ -61,13 +65,6 @@ void Game::handleEvents() {
 void Game::update() {
 	manager.refresh();
 	manager.update(); // Update all entities -> updates all components
-
-	player.getComponent<TransformComponent>().position.Add(Vector2D(5, 0));
-
-	// For fun
-	if (player.getComponent<TransformComponent>().position.x > 100) {
-		player.getComponent<SpriteComponent>().setTex("assets/enemy.png");
-	}
 }
 
 void Game::render() {

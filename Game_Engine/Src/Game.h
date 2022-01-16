@@ -23,6 +23,7 @@ public:
 	bool running() { return isRunning; } // Return current state of game
 
 	static SDL_Renderer* renderer; // To avoid creating copies of the same pointer
+	static SDL_Event event;
 
 private:
 	bool isRunning = false;
